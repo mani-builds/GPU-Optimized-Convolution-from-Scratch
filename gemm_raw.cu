@@ -49,7 +49,7 @@ int main() {
   int patch_size = kernel_shape[1]*kernel_shape[2]*kernel_shape[3];
 
   // Reading output image shape
-  FILE *file = fopen("dog_array_shape.txt", "r");
+  FILE *file = fopen("512_array_shape.txt", "r");
     if (file == NULL) {
         return 1; // Error opening file
     }
@@ -84,7 +84,7 @@ int main() {
 
     // Reading the im2col matrix (in 1D array form)
     im2col_h = (float *)malloc(patch_size*number_of_patches*sizeof(float));
-    FILE *im2col_file = fopen("im2col_array_identity.txt", "r");
+    FILE *im2col_file = fopen("im2col_512_array_identity.txt", "r");
     if (im2col_file == NULL) {
       return 1;
     }
@@ -118,7 +118,7 @@ int main() {
 
     cudaMemcpy(output_h, output, C_out * number_of_patches * sizeof(float), cudaMemcpyDeviceToHost);
 
-    FILE *ofile = fopen("output_gemm_identity.txt", "w");
+    FILE *ofile = fopen("512_output_gemm_identity.txt", "w");
     if (ofile == NULL){ return 1;}
     for (int i = 0; i<C_out * number_of_patches; i++){
       fprintf(ofile, "%.0f ", output_h[i]);

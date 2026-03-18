@@ -4,12 +4,12 @@ from PIL import Image
 import numpy as np
 
 def image_build():
-    # f_name = input("Enter the file for output of gemm in text: ")
-    # a_name = input("Enter the file for shape of the input array in text: ")
-    # o_name = input("Enter the file for output in jpg: ")
-    f_name = 'output_gemm_identity.txt'
-    a_name = 'dog_array_shape.txt'
-    o_name = 'image_output_identity.jpg'
+    f_name = input("Enter the file for output of gemm in text: ")
+    a_name = input("Enter the file for shape of the input array in text: ")
+    o_name = input("Enter the file for output in jpg: ")
+    # f_name = 'output_gemm_identity.txt'
+    # a_name = 'dog_array_shape.txt'
+    # o_name = 'image_output_identity.jpg'
     with open(f_name, 'r') as f:
         output = np.loadtxt(f)
     with open(a_name, 'r') as a:

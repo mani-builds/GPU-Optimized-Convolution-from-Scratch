@@ -29,6 +29,7 @@ Day 3: cutlass, cuTE lecture
 - Use GEMM (? - if you have used im2col)
 
 - [ ] Implement WMMA convolution as GEMM with im2col
+  - Have to pad kernel shape to match wmma matrices (i.e 16)
 
 Test: Use MNIST or synthetic data. Verify against NumPy convolve.
 
