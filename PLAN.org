@@ -27,6 +27,7 @@ Day 3: cutlass, cuTE lecture
 - Can you perform convolution like in Naive conv? (Ans: No, since it's not efficient)
 
 - Use GEMM (? - if you have used im2col)
+- Note im2col.cu's output depends only on kernel shape, not on the kernel itself
 
 - [ ] Implement WMMA convolution as GEMM with im2col
   - Have to pad kernel shape to match wmma matrices (i.e 16)

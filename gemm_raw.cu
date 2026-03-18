@@ -30,8 +30,10 @@ int main() {
   float *output_h;
 
   // Reading Kernel size
-
-  FILE *kfile = fopen("kernel_array_shape.txt", "r");
+  char f_kernel_shape[50];
+  printf("\n Enter the file of kernel array shape (txt): ");
+  scanf("%s", f_kernel_shape); // "kernel_array_shape.txt"
+  FILE *kfile = fopen(f_kernel_shape, "r");
   if (kfile == NULL) {
         return 1; // Error opening file
     }
@@ -49,7 +51,10 @@ int main() {
   int patch_size = kernel_shape[1]*kernel_shape[2]*kernel_shape[3];
 
   // Reading output image shape
-  FILE *file = fopen("512_array_shape.txt", "r");
+  char f_image_shape[50];
+  printf("\n Enter the file of input image array shape (txt): ");
+  scanf("%s", f_image_shape); // "512_array_shape.txt"
+  FILE *file = fopen(f_image_shape, "r");
     if (file == NULL) {
         return 1; // Error opening file
     }
@@ -64,9 +69,12 @@ int main() {
 
     int C_in = image_shape[0];
     int number_of_patches = image_shape[1] * image_shape[2];
-    // Reading Kernel matrix (in 1D array)
 
-  FILE *kernel_file = fopen("identity_kernel_array.txt", "r");
+    // Reading Kernel matrix (in 1D array)
+    char f_kernel_array[50];
+    printf("\n Enter the file of kernel array (txt): ");
+    scanf("%s", f_kernel_array); // "gaussian_kernel.txt"
+  FILE *kernel_file = fopen(f_kernel_array, "r");
   if (kernel_file == NULL) {
         return 1; // Error opening file
     }
@@ -83,8 +91,11 @@ int main() {
            number_of_patches);
 
     // Reading the im2col matrix (in 1D array form)
+    char f_im2col_array[50];
+    printf("\n Enter the file of im2col (txt): ");
+    scanf("%s", f_im2col_array); // "im2col_512_array_identity.txt"
     im2col_h = (float *)malloc(patch_size*number_of_patches*sizeof(float));
-    FILE *im2col_file = fopen("im2col_512_array_identity.txt", "r");
+    FILE *im2col_file = fopen(f_im2col_array, "r");
     if (im2col_file == NULL) {
       return 1;
     }
@@ -118,7 +129,10 @@ int main() {
 
     cudaMemcpy(output_h, output, C_out * number_of_patches * sizeof(float), cudaMemcpyDeviceToHost);
 
-    FILE *ofile = fopen("512_output_gemm_identity.txt", "w");
+    char f_output_array[50];
+    printf("\n Enter the file of output image array (txt): ");
+    scanf("%s", f_output_array); // "512_output_gemm_identity.txt"
+    FILE *ofile = fopen(f_output_array, "w");
     if (ofile == NULL){ return 1;}
     for (int i = 0; i<C_out * number_of_patches; i++){
       fprintf(ofile, "%.0f ", output_h[i]);

@@ -3,7 +3,6 @@
 
 using namespace nvcuda;
 
-
 // Must be multiples of 16
 #define MATRIX_M 16384
 #define MATRIX_N 16384
@@ -76,6 +75,7 @@ __global__ void gemm_tensor(half *a, half *b, float *c, int M, int N, int K,
     wmma::store_matrix_sync(c + cRow + cCol * ldc, c_frag, ldc, wmma::mem_row_major);
     }
 }
+
 int main() {
   return 0;
 }
