@@ -100,11 +100,11 @@ int main(){
   kernel_size = kernel_shape[2];
 
   float *image_h;
-  float *kernel_h;
+  // float *kernel_h;
   float *im2col_h;
 
   image_h = (float *)malloc(C_in*H_in*W_in*sizeof(float));
-  kernel_h = (float *)malloc(C_out*C_in*kernel_size*kernel_size*sizeof(float));
+  // kernel_h = (float *)malloc(C_out*C_in*kernel_size*kernel_size*sizeof(float));
 
   char f_input_image_array[50];
   printf("\n Enter the file of image array (txt): ");
@@ -124,19 +124,19 @@ int main(){
     // for(int i=0; i<10; i++) printf("%f\t ", image_h[i]);
     // printf("\n");
 
-  char f_kernel_array[50];
-  printf("\n Enter the file name of kernel array (txt): ");
-  scanf("%s", f_kernel_array);
-  FILE *kernel_file = fopen(f_kernel_array, "r");
-  if (kernel_file == NULL) {
-        return 1; // Error opening file
-    }
-    i=0;
-    float kvalue;
-    while (fscanf(kernel_file, "%f", &kvalue) == 1) {
-      kernel_h[i] = kvalue;
-      i++;
-    }
+  // char f_kernel_array[50];
+  // printf("\n Enter the file name of kernel array (txt): ");
+  // scanf("%s", f_kernel_array);
+  // FILE *kernel_file = fopen(f_kernel_array, "r");
+  // if (kernel_file == NULL) {
+  //       return 1; // Error opening file
+  //   }
+  //   i=0;
+  //   float kvalue;
+  //   while (fscanf(kernel_file, "%f", &kvalue) == 1) {
+  //     kernel_h[i] = kvalue;
+  //     i++;
+  //   }
 
     // printf("Kernel array sample: \n");
     // for(int i=0; i<10; i++) printf("%f\t ", kernel_h[i]);
@@ -150,15 +150,15 @@ int main(){
   im2col_h = (float *)malloc(im2col_H*im2col_W*sizeof(float));
 
   float *image;
-  float *kernel;
+  // float *kernel;
   float *im2col;
 
   cudaMalloc(&image, C_in*H_in*W_in*sizeof(float));
-  cudaMalloc(&kernel, C_out*C_in*kernel_size*kernel_size*sizeof(float));
+  // cudaMalloc(&kernel, C_out*C_in*kernel_size*kernel_size*sizeof(float));
   cudaMalloc(&im2col, im2col_H*im2col_W*sizeof(float));
 
   cudaMemcpy(image,image_h,C_in*H_in*W_in*sizeof(float), cudaMemcpyHostToDevice);
-  cudaMemcpy(kernel,kernel_h,C_out*C_in*kernel_size*kernel_size*sizeof(float), cudaMemcpyHostToDevice);
+  // cudaMemcpy(kernel,kernel_h,C_out*C_in*kernel_size*kernel_size*sizeof(float), cudaMemcpyHostToDevice);
 
   printf("\nInput DIM H_in and W_in: (%d, %d)",H_in, W_in);
   printf("\nOutput DIM H_out and W_out: (%d, %d)",H_out, W_out);
@@ -197,14 +197,14 @@ int main(){
 
   fclose(file);
   fclose(image_file);
-  fclose(kernel_file);
+  // fclose(kernel_file);
   fclose(im2co_file);
   free(image_shape);
   free(image_h);
-  free(kernel_h);
+  // free(kernel_h);
   free(im2col_h);
   cudaFree(image);
-  cudaFree(kernel);
+  // cudaFree(kernel);
   cudaFree(im2col);
 
 }
