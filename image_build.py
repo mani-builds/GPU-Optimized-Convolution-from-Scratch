@@ -16,7 +16,11 @@ def image_build():
         shape = np.loadtxt(a)
     n_channels, height, width = shape.astype(int)
     output = output.reshape([height, width, n_channels])
+    # # 1. Reshape using the actual memory layout from CUDA (CHW)
+    # output = output.reshape([n_channels, height, width]) # CHW
     output = output.astype(np.uint8)
+    # output = output.transpose(1, 2, 0)
+    # output = np.clip(output, 0, 255).astype(np.uint8)
     im_o = Image.fromarray(output)
     im_o.save(o_name)
 
